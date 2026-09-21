@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#ffd400">
+<meta name="description" content="Gopal Sharma — student developer, innovator, robotics builder and founder of Spark Labs.">
+<title>GOPAL / BUILDER MODE</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap');
+
+:root{
+  --yellow:#ffd400;
+  --ink:#101010;
+  --paper:#fffdf3;
+  --red:#ff674d;
+  --green:#b8ee72;
+  --blue:#8edcff;
+  --line:3px;
+  --shadow:8px 8px 0 var(--ink);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  color:var(--ink);
+  background:var(--paper);
+  font-family:"Space Grotesk",sans-serif;
+  overflow-x:hidden;
+}
+body:before{
+  content:"";
+  position:fixed;inset:0;z-index:999;pointer-events:none;
+  opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+body:after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.065;
+  background-image:linear-gradient(var(--ink) 1px,transparent 1px),linear-gradient(90deg,var(--ink) 1px,transparent 1px);
+  background-size:44px 44px;
+}
+::selection{background:var(--ink);color:var(--yellow)}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+button{font:inherit}
+.wrap{width:min(1240px,92vw);margin-inline:auto;min-width:0}
+.mono,.tiny{font-family:"DM Mono",monospace}
+.tiny{font-size:9px;letter-spacing:.08em;text-transform:uppercase}
+.scribble{
+  position:absolute;pointer-events:none;font-family:"DM Mono",monospace;font-weight:700;
+  user-select:none;
+}
+.s1{top:9%;right:3%;font-size:55px;transform:rotate(13deg)}
+.s2{bottom:5%;left:2%;font-size:65px;transform:rotate(-10deg)}
+.s3{top:45%;left:-10px;font-size:30px;transform:rotate(-8deg)}
+.s4{bottom:10%;right:2%;font-size:30px;transform:rotate(18deg)}
+
+/* NAV */
+nav{
+  height:78px;border-bottom:var(--line) solid;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.brand{font:800 25px "Syne",sans-serif;letter-spacing:-1px}
+.brand b{display:inline-block;background:var(--yellow);border:2px solid;padding:2px 8px;transform:rotate(-2deg)}
+.nav-links{display:flex;gap:24px;font:10px "DM Mono";text-transform:uppercase}
+.nav-links a:hover{text-decoration:underline;text-decoration-thickness:3px;text-decoration-color:var(--yellow)}
+.music-pill{
+  display:flex;align-items:center;gap:8px;border:2px solid;padding:7px 10px;
+  background:#fff;font:9px "DM Mono";text-transform:uppercase;cursor:pointer;
+}
+.music-dot{width:8px;height:8px;border:2px solid;border-radius:50%;background:#999}
+.music-pill.playing .music-dot{background:#35d06f;animation:pulse 1s infinite}
+
+/* HERO */
+.hero{
+  min-height:calc(100vh - 78px);
+  display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr);
+  gap:45px;align-items:center;padding:68px 0 85px;position:relative;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:9px;border:3px solid;background:#fff;
+  padding:8px 11px;box-shadow:5px 5px var(--ink);font:9px "DM Mono";
+  text-transform:uppercase;margin-bottom:28px;
+}
+.live{width:9px;height:9px;border:2px solid;border-radius:50%;background:#4bd36b}
+.hero h1{
+  margin:0;font:800 clamp(72px,10vw,155px)/.77 "Syne",sans-serif;
+  letter-spacing:-8px;text-transform:uppercase;
+}
+.hero h1 .outline{color:transparent;-webkit-text-stroke:3px var(--ink)}
+.hero h1 .highlight{position:relative;z-index:1}
+.hero h1 .highlight:after{
+  content:"";position:absolute;left:-5px;right:-6px;bottom:2px;height:25%;
+  background:var(--yellow);z-index:-1;transform:rotate(-1deg);
+}
+.hero-copy p{max-width:650px;font-size:18px;line-height:1.62;margin:34px 0 28px}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  min-height:48px;padding:13px 18px;border:3px solid var(--ink);
+  background:var(--yellow);box-shadow:6px 6px var(--ink);
+  font:800 10px "Space Grotesk";text-transform:uppercase;
+  transition:.18s;white-space:normal;
+}
+.btn:hover{transform:translate(4px,4px);box-shadow:2px 2px var(--ink)}
+.btn.white{background:#fff}
+.btn.black{background:var(--ink);color:var(--yellow)}
+
+.hero-visual{height:570px;position:relative;display:grid;place-items:center;min-width:0}
+.photo-card{
+  width:min(390px,76%);aspect-ratio:4/5;border:4px solid;
+  background:var(--yellow);box-shadow:15px 15px var(--ink);
+  transform:rotate(3deg);overflow:hidden;position:relative;
+}
+.photo-card img{width:100%;height:100%;object-fit:cover}
+.photo-fallback{
+  display:none;width:100%;height:100%;place-items:center;text-align:center;
+  font:800 40px "Syne";line-height:.8;padding:25px;
+}
+.photo-card.no-photo img{display:none}
+.photo-card.no-photo .photo-fallback{display:grid}
+.tape{position:absolute;z-index:2;width:125px;height:29px;top:14px;left:50%;transform:translateX(-50%) rotate(-4deg);background:#fff0a4;opacity:.9}
+.sticker{
+  position:absolute;z-index:4;border:3px solid;background:#fff;padding:13px;
+  box-shadow:6px 6px var(--ink);font:800 14px "Syne";line-height:.95;
+}
+.sticker.a{top:38px;right:0;transform:rotate(7deg)}
+.sticker.b{bottom:45px;left:0;background:var(--green);transform:rotate(-7deg)}
+.hero-note{
+  position:absolute;bottom:0;right:0;background:var(--blue);border:3px solid;
+  padding:9px 12px;box-shadow:5px 5px var(--ink);font:9px "DM Mono";
+  transform:rotate(3deg);
+}
+
+/* MARQUEE */
+.marquee{overflow:hidden;background:var(--ink);color:var(--yellow);border-block:var(--line) solid;white-space:nowrap}
+.marquee span{display:inline-block;padding:15px 0;font:11px "DM Mono";animation:marquee 22s linear infinite}
+
+/* GENERAL */
+section{padding:115px 0}
+.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:52px}
+.section-head h2{margin:0;font:800 clamp(55px,7vw,100px)/.8 "Syne";letter-spacing:-5px}
+.section-head .index{font:9px "DM Mono";text-transform:uppercase}
+.intro{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:65px}
+.lead{font-size:clamp(29px,3.4vw,49px);font-weight:700;line-height:1.14}
+.lead mark{background:var(--yellow);padding:0 4px}
+.factbox{border-left:3px solid;padding-left:23px;font:11px "DM Mono";line-height:1.85}
+.factbox b{font:800 17px "Syne"}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border:3px solid;margin-top:58px}
+.stat{padding:25px;border-right:3px solid}.stat:last-child{border-right:0}
+.stat strong{font:800 44px "Syne";display:block}.stat span{font:9px "DM Mono";text-transform:uppercase}
+
+/* SPARK LABS FEATURE */
+.spark{
+  background:var(--yellow);border-block:var(--line) solid;position:relative;overflow:hidden;
+}
+.spark-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);gap:28px;align-items:stretch}
+.spark-main{
+  background:var(--ink);color:#fff;border:4px solid;box-shadow:12px 12px #fff;
+  padding:38px;position:relative;overflow:hidden;
+}
+.spark-main:after{
+  content:"SPARK";position:absolute;right:-30px;bottom:-45px;
+  font:800 170px/.8 "Syne";color:transparent;-webkit-text-stroke:2px #333;pointer-events:none;
+}
+.spark-kicker{font:9px "DM Mono";color:var(--yellow);letter-spacing:.08em}
+.spark h2{font:800 clamp(65px,9vw,125px)/.76 "Syne";letter-spacing:-7px;margin:20px 0}
+.spark h2 span{color:var(--yellow)}
+.spark-main p{max-width:680px;font-size:16px;line-height:1.65;color:#ddd}
+.spark-features{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:27px}
+.spark-feature{border:2px solid #555;padding:13px;min-height:90px}.spark-feature b{font:800 18px "Syne";display:block;color:var(--yellow);margin-bottom:6px}.spark-feature small{font:9px "DM Mono";line-height:1.45;color:#ccc}
+.spark-side{display:flex;flex-direction:column;gap:13px}
+.spark-card{border:3px solid;padding:22px;background:#fff;box-shadow:7px 7px var(--ink);min-height:0}
+.spark-card.yellow{background:var(--yellow)}
+.spark-card h3{font:800 29px "Syne";margin:0 0 9px}.spark-card p{font-size:11px;line-height:1.55;margin:0}
+.spark-link{display:inline-flex;margin-top:15px;border:2px solid;padding:8px 10px;font:800 9px "DM Mono";background:var(--yellow)}
+.spark-card.yellow .spark-link{background:var(--ink);color:var(--yellow);border-color:var(--ink)}
+
+/* PROJECTS */
+.projects{background:var(--paper)}
+.project-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.project{
+  min-width:0;border:3px solid;background:#fff;box-shadow:7px 7px var(--ink);
+  padding:26px;position:relative;overflow:hidden;transition:.2s;
+}
+.project:hover{transform:translateY(-6px) rotate(-.4deg)}
+.project.dark{background:var(--ink);color:#fff}.project.red{background:var(--red)}
+.project.wide{grid-column:1/-1}
+.project .tag{font:9px "DM Mono";border:2px solid;padding:5px 7px;display:inline-block}
+.project h3{font:800 clamp(44px,5vw,75px)/.78 "Syne";letter-spacing:-4px;margin:21px 0 17px}
+.project h3 span{color:var(--yellow)}.project.red h3 span{color:var(--ink)}
+.project p{font-size:13px;line-height:1.6;max-width:780px;margin:0 0 17px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chips span{border:2px solid;padding:5px 7px;font:8px "DM Mono"}
+.project.dark .chips span{border-color:#fff}
+.project-info{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;border-top:2px solid;margin-top:20px;padding-top:16px}
+.project-info b{font:8px "DM Mono";display:block;margin-bottom:5px;opacity:.65}
+.project-info small{font:10px "DM Mono";line-height:1.5;display:block;overflow-wrap:anywhere}
+.project-num{position:absolute;right:16px;bottom:14px;font:8px "DM Mono";opacity:.6}
+.doodle-corner{position:absolute;right:16px;top:13px;font:800 31px "DM Mono";transform:rotate(12deg)}
+
+/* WINS */
+.dark-section{background:var(--ink);color:#fff;border-block:var(--line) solid}
+.dark-section .section-head h2{color:var(--yellow)}
+.win-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.win{border:2px solid #fff;padding:22px;background:#151515;min-height:185px;transition:.2s}
+.win:hover{background:var(--yellow);color:var(--ink);transform:translateY(-5px);box-shadow:6px 6px #fff}
+.win .badge{display:inline-block;background:var(--yellow);color:var(--ink);padding:5px 7px;font:8px "DM Mono"}
+.win h3{font:800 24px "Syne";line-height:1;margin:16px 0 8px}.win p{font-size:11px;line-height:1.55;color:#ccc;margin:0}.win:hover p{color:var(--ink)}
+.win.major{grid-column:span 2}.win.major h3{font-size:34px}
+
+/* CERTS / SKILLS */
+.cert-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+.cert{border:3px solid;padding:26px;background:#fff;box-shadow:7px 7px var(--ink)}
+.cert:nth-child(2){background:var(--yellow);transform:rotate(1deg)}
+.cert .seal{float:right;width:60px;height:60px;border:2px dashed;border-radius:50%;display:grid;place-items:center;text-align:center;font:8px "DM Mono"}
+.cert h3{font:800 30px "Syne";margin:20px 0 8px}.cert p{font:11px "DM Mono";line-height:1.55}
+.skill-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.skill{border:3px solid;padding:18px;background:#f1eee2;min-height:110px;transition:.18s}.skill:hover{background:var(--yellow);transform:rotate(-2deg);box-shadow:5px 5px var(--ink)}
+.skill b{display:block;font:800 20px "Syne";margin-bottom:8px}.skill small{font:8px "DM Mono"}
+
+/* CONTACT */
+.contact{background:var(--red);border-top:var(--line) solid;text-align:center;position:relative}
+.contact h2{font:800 clamp(70px,10vw,145px)/.78 "Syne";letter-spacing:-7px;margin:16px 0}
+.contact p{max-width:640px;margin:25px auto;line-height:1.6}.contact-links{display:flex;justify-content:center;flex-wrap:wrap;gap:12px}
+footer{background:var(--yellow);padding:23px 0;font:9px "DM Mono"}.footer-row{display:flex;justify-content:space-between}
+
+/* FLOATING CONTROLS */
+.wa{
+  position:fixed;right:20px;bottom:20px;width:63px;height:63px;z-index:100;
+  border:4px solid;background:#25d366;border-radius:50%;display:grid;place-items:center;
+  box-shadow:6px 6px var(--ink);transition:.2s;
+}
+.wa:hover{transform:translateY(-5px) rotate(-6deg)}.wa svg{width:33px;height:33px;fill:#111}
+.sound-toggle{
+  position:fixed;left:19px;bottom:19px;z-index:100;width:48px;height:48px;
+  border:3px solid;background:var(--yellow);box-shadow:5px 5px var(--ink);
+  font:13px "DM Mono";cursor:pointer;
+}
+.sound-toggle.playing{background:var(--ink);color:var(--yellow);border-color:var(--yellow);box-shadow:5px 5px var(--yellow)}
+.toast{
+  position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;
+  background:#fff;border:3px solid;padding:9px 13px;box-shadow:5px 5px var(--ink);
+  z-index:110;font:9px "DM Mono";pointer-events:none;transition:.25s;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+.reveal{opacity:0;transform:translateY(32px);transition:.75s cubic-bezier(.2,.7,.2,1)}.reveal.show{opacity:1;transform:none}
+@keyframes marquee{to{transform:translateX(-50%)}}@keyframes pulse{50%{transform:scale(.55);opacity:.45}}
+@keyframes floaty{50%{transform:translateY(-7px) rotate(2deg)}}
+
+/* MOBILE */
+@media(max-width:850px){
+  .wrap{width:calc(100% - 28px)}
+  nav{height:66px}.nav-links{display:none}
+  .music-pill{font-size:8px}
+  .hero{display:flex;flex-direction:column;align-items:stretch;min-height:auto;padding:48px 0 65px;gap:20px}
+  .hero h1{font-size:clamp(54px,15vw,100px);letter-spacing:-4px}
+  .hero h1 .outline{-webkit-text-stroke:2px var(--ink)}
+  .hero-copy p{font-size:15px;line-height:1.6}
+  .ctas{display:grid;grid-template-columns:1fr}.btn{width:100%}
+  .hero-visual{height:430px}.photo-card{width:min(300px,66vw)}
+  section{padding:85px 0}.section-head{display:block}.section-head .index{margin-bottom:17px}.section-head h2{font-size:clamp(50px,13vw,80px)}
+  .intro{grid-template-columns:1fr}.stats{grid-template-columns:1fr}.stat{border-right:0;border-bottom:3px solid}.stat:last-child{border-bottom:0}
+  .spark-grid{grid-template-columns:1fr}.spark-main{padding:27px}.spark h2{font-size:clamp(58px,15vw,95px)}.spark-features{grid-template-columns:1fr 1fr}
+  .project-grid{grid-template-columns:1fr}.project.wide{grid-column:auto}.project h3{font-size:clamp(45px,13vw,76px)}
+  .project-info{grid-template-columns:1fr 1fr}
+  .win-grid{grid-template-columns:1fr 1fr}.win.major{grid-column:auto}.win.major h3{font-size:27px}
+  .cert-grid{grid-template-columns:1fr}.skill-grid{grid-template-columns:repeat(3,1fr)}
+  .contact h2{font-size:clamp(62px,15vw,105px)}
+}
+@media(max-width:520px){
+  .wrap{width:calc(100% - 20px)}nav{height:61px}.brand{font-size:20px}.music-pill{padding:6px 8px}
+  .hero{padding-top:40px}.hero h1{font-size:clamp(49px,14.5vw,76px);letter-spacing:-2.5px}.hero h1 .outline{-webkit-text-stroke:1.5px var(--ink)}
+  .hero-copy p{font-size:14px}.hero-visual{height:365px}.photo-card{width:230px}.sticker{font-size:9px;padding:9px;max-width:100px}
+  .s1,.s2,.s3,.s4{display:none}
+  .section-head h2{font-size:clamp(45px,13vw,70px);letter-spacing:-3px}
+  .spark-main{padding:20px}.spark h2{font-size:clamp(48px,14vw,72px);letter-spacing:-3px}.spark-main p{font-size:13px}.spark-features{grid-template-columns:1fr}
+  .project{padding:19px;box-shadow:5px 5px var(--ink)}.project h3{font-size:clamp(40px,12.5vw,62px);letter-spacing:-2px}.project p{font-size:12px}.project-info{grid-template-columns:1fr}
+  .win-grid{grid-template-columns:1fr}.win.major{grid-column:auto}
+  .skill-grid{grid-template-columns:1fr 1fr}.skill{min-height:100px;padding:15px}.skill b{font-size:18px}
+  .float-wa{width:57px;height:57px;right:13px;bottom:13px}.sound-toggle{width:42px;height:42px;left:13px;bottom:13px}
+  .footer-row{display:block;text-align:center;line-height:2}
+}
+@media(max-width:360px){.wrap{width:calc(100% - 16px)}.skill-grid{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+
+<body>
+<div class="wrap">
+<nav>
+  <a class="brand" href="#"><b>G</b>OPAL.</a>
+  <div class="nav-links">
+    <a href="#about">about</a><a href="#spark">spark labs</a><a href="#work">work</a><a href="#wins">wins</a><a href="#contact">contact</a>
+  </div>
+  <button class="music-pill" id="musicPill"><span class="music-dot"></span><span id="musicLabel">vibe off</span></button>
+</nav>
+</div>
+
+<header class="hero wrap">
+  <div class="hero-copy reveal">
+    <div class="eyebrow"><span class="live"></span> STUDENT DEVELOPER / INNOVATOR / BUILDER</div>
+    <h1>HEY.<br><span class="outline">I'M</span><br><span class="highlight">GOPAL.</span></h1>
+    <p>Student developer, innovator, robotics builder and founder of Spark Labs. I turn <b>“bro, what if…”</b> into software, prototypes and things people can actually use.</p>
+    <div class="ctas">
+      <a class="btn" href="#spark">SPARK LABS ★</a>
+      <a class="btn white" href="#work">SEE MY WORK ↓</a>
+      <a class="btn black" href="https://www.linkedin.com/in/gopal-sharma-67903a38a/" target="_blank" rel="noopener">LINKEDIN ↗</a>
+    </div>
+  </div>
+
+  <div class="hero-visual reveal">
+    <div class="scribble s1">✦</div><div class="scribble s2">↗</div>
+    <div class="sticker a">BUILD<br>WEIRD<br>THINGS ✦</div>
+    <div class="sticker b">BUILDER<br>MODE: ON.</div>
+    <div class="photo-card" id="photoCard">
+      <div class="tape"></div>
+      <img src="photo.jpg" alt="Gopal Sharma" onerror="photoMissing()">
+      <div class="photo-fallback">GOPAL<br><span class="tiny">photo.jpg</span></div>
+    </div>
+    <div class="hero-note">15 / STUDENT BUILDER<br>JAIPUR → INTERNET</div>
+  </div>
+</header>
+
+<div class="marquee"><span>CODE ✦ ROBOTICS ✦ AI ✦ CYBERSECURITY ✦ SPARK LABS ✦ BUILD ✦ BREAK ✦ LEARN ✦ SHIP ✦ NATIONAL WINNER ✦ CODE ✦ ROBOTICS ✦ AI ✦ CYBERSECURITY ✦ SPARK LABS ✦</span></div>
+
+<section id="about" class="wrap">
+  <div class="section-head reveal"><div class="index">01 / the human behind the code</div><h2>ABOUT<br>ME.</h2></div>
+  <div class="intro reveal">
+    <div class="lead">I work across <mark>software, AI, robotics, cybersecurity and entrepreneurship</mark>. One lane felt unnecessarily restrictive, so I ignored it.</div>
+    <div class="factbox"><b>BUILDING</b><br>Apps · AI experiments · Robotics · Embedded systems · Cybersecurity concepts · Communities<br><br><b>BASE</b><br>Jaipur, India<br><br><b>MISSION</b><br>Learn fast. Build real. Keep shipping.</div>
+  </div>
+  <div class="stats reveal">
+    <div class="stat"><strong>01</strong><span>national coding competition winner</span></div>
+    <div class="stat"><strong>TOP 12</strong><span>young student innovator hunt / launchverse</span></div>
+    <div class="stat"><strong>∞</strong><span>ideas refusing to stay in a notebook</span></div>
+  </div>
+</section>
+
+<section id="spark" class="spark">
+<div class="wrap">
+  <div class="section-head reveal"><div class="index">02 / main character project</div><h2>SPARK<br>LABS.</h2></div>
+  <div class="spark-grid">
+    <article class="spark-main reveal">
+      <div class="spark-kicker">STUDENT-LED INNOVATION COMMUNITY / ACTIVE</div>
+      <h2>SPARK<br><span>LABS</span></h2>
+      <p>A student-driven technology and innovation community where ideas become real projects. Robotics, coding, AI, hardware, startups, workshops, kits and people who actually want to build.</p>
+      <div class="spark-features">
+        <div class="spark-feature"><b>IDEA LAB</b><small>Turn weird ideas into projects worth building.</small></div>
+        <div class="spark-feature"><b>ROBOTICS</b><small>Build robots, smart devices and hardware.</small></div>
+        <div class="spark-feature"><b>SPARK KITS</b><small>Hands-on STEM and robotics building kits.</small></div>
+        <div class="spark-feature"><b>LAUNCH</b><small>Challenges, showcases and community opportunities.</small></div>
+      </div>
+    </article>
+    <aside class="spark-side reveal">
+      <div class="spark-card yellow"><div class="tiny">THE PHILOSOPHY</div><h3>IDEA → BUILD → TEST → LAUNCH</h3><p>Not another “watch this tutorial” community. The point is to actually make something.</p><a class="spark-link" href="https://sparklabz.netlify.app/" target="_blank" rel="noopener">VISIT SPARK LABS ↗</a></div>
+      <div class="spark-card"><div class="tiny">WHAT'S THERE</div><h3>Projects. Kits. Events. Community.</h3><p>From student projects and robotics to challenges and workshops.</p><a class="spark-link" href="https://sparklabz.netlify.app/" target="_blank" rel="noopener">SPARKLABZ.NETLIFY.APP ↗</a></div>
+    </aside>
+  </div>
+</div>
+</section>
+
+<section id="work" class="projects">
+<div class="wrap">
+  <div class="section-head reveal"><div class="index">03 / selected builds</div><h2>THINGS<br>I BUILT.</h2></div>
+  <div class="project-grid">
+    <article class="project dark wide reveal">
+      <span class="tag">01 / AI × CYBERSECURITY</span><div class="doodle-corner">✦</div>
+      <h3>SECURE <span>SPARK</span></h3>
+      <p>AI Digital Guardian concept focused on scam and phishing detection, deepfake awareness, identity protection, privacy intelligence and digital-footprint awareness.</p>
+      <div class="chips"><span>SCAM AI</span><span>DEEPSHIELD</span><span>IDENTITY</span><span>PRIVACY X-RAY</span><span>DIGITAL FOOTPRINT</span><span>APPU AI</span></div>
+      <div class="project-info"><div><b>PROBLEM</b><small>Digital threats are becoming social, synthetic and harder to spot.</small></div><div><b>ROLE</b><small>Product concept · architecture · UI direction · development.</small></div><div><b>STACK</b><small>Python · AI/ML · Computer Vision · Flutter · Firebase.</small></div></div><span class="project-num">SS / 001</span>
+    </article>
+
+    <article class="project reveal">
+      <span class="tag">02 / FINTECH × WEB</span><div class="doodle-corner">₹</div>
+      <h3>FIN<br><span>WISE</span></h3>
+      <p>Finance-tracking concept that turns spending and financial patterns into a cleaner visual dashboard.</p>
+      <div class="chips"><span>EXPENSES</span><span>DASHBOARD</span><span>ANALYTICS</span><span>UI / UX</span></div>
+      <div class="project-info"><div><b>ROLE</b><small>Product thinking · interface · frontend.</small></div><div><b>STACK</b><small>HTML · CSS · JavaScript.</small></div><div><b>STATUS</b><small>Concept / build.</small></div></div><span class="project-num">FW / 002</span>
+    </article>
+
+    <article class="project dark reveal">
+      <span class="tag">03 / COMPUTER VISION</span><div class="doodle-corner">◎</div>
+      <h3>VOICE<br><span>BRIDGE</span></h3>
+      <p>Hand-sign-to-voice concept exploring computer vision as a bridge between visual gestures and spoken output.</p>
+      <div class="chips"><span>HAND SIGNS</span><span>GESTURE</span><span>VISION</span><span>VOICE</span></div>
+      <div class="project-info"><div><b>IDEA</b><small>Recognise selected signs and convert output into speech.</small></div><div><b>FOCUS</b><small>Computer vision · TTS · accessibility.</small></div><div><b>ROLE</b><small>Concept · system thinking · experimentation.</small></div></div><span class="project-num">VB / 003</span>
+    </article>
+
+    <article class="project red reveal">
+      <span class="tag">04 / HEALTHCARE × PRODUCT</span><div class="doodle-corner">✚</div>
+      <h3>MEDI<br><span>CUBE</span></h3>
+      <p>Healthcare-oriented project concept exploring technology-assisted workflows, structured information and approachable product design.</p>
+      <div class="chips"><span>HEALTHCARE</span><span>PRODUCT</span><span>DATA</span><span>UX</span></div>
+      <div class="project-info"><div><b>DIRECTION</b><small>Make complex information easier to navigate.</small></div><div><b>ROLE</b><small>Concept · product thinking · presentation.</small></div><div><b>FOCUS</b><small>Healthcare · Product · UX · Innovation.</small></div></div><span class="project-num">MC / 004</span>
+    </article>
+  </div>
+</div>
+</section>
+
+<section id="wins" class="dark-section">
+<div class="wrap">
+  <div class="section-head reveal"><div class="index">04 / receipts</div><h2>WINS &<br>RECOGNITION.</h2></div>
+  <div class="win-grid">
+    <article class="win major reveal"><span class="badge">NATIONAL</span><h3>GoCoderz — National Coding Competition Winner</h3><p>National Winner in the senior-grade category. One of the biggest milestones in my coding journey.</p></article>
+    <article class="win reveal"><span class="badge">TOP 12</span><h3>Young Student Innovator Hunt — Launchverse</h3><p>Reached the Top 12 among young student innovators.</p></article>
+    <article class="win reveal"><span class="badge">1ST PRIZE</span><h3>FutureHacks</h3><p>Won first prize in a coding-focused hackathon.</p></article>
+    <article class="win reveal"><span class="badge">ROBOTICS</span><h3>World Robot Olympiad</h3><p>Selected for the WRO pathway, combining programming, engineering and teamwork.</p></article>
+    <article class="win reveal"><span class="badge">10TH PLACE</span><h3>Inspire</h3><p>Placed 10th in the Senior category in the Inspire student innovation competition.</p></article>
+    <article class="win reveal"><span class="badge">STEM</span><h3>Subodh STEM — 2nd Runner Up</h3><p>Recognised in an inter-school STEM competition.</p></article>
+    <article class="win reveal"><span class="badge">DESIGN</span><h3>Inter-School eBook Design Winner</h3><p>Won an inter-school eBook cover-page design competition.</p></article>
+    <article class="win reveal"><span class="badge">WORKSHOP</span><h3>Robotics Workshop Organiser</h3><p>Organised a robotics workshop and helped create a hands-on building experience.</p></article>
+  </div>
+</div>
+</section>
+
+<section class="wrap">
+  <div class="section-head reveal"><div class="index">05 / certified brain</div><h2>CERTS &<br>STACK.</h2></div>
+  <div class="cert-grid reveal">
+    <article class="cert"><div class="seal">C++<br>CERT</div><span class="tiny">PROGRAMMING</span><h3>C++ Certification</h3><p>Programming certification demonstrating structured C++ learning and problem-solving practice.</p></article>
+    <article class="cert"><div class="seal">C<br>CODERPAD</div><span class="tiny">CODERPAD</span><h3>C Programming — CoderPad</h3><p>Certification demonstrating C programming knowledge.</p></article>
+  </div>
+  <div style="height:35px"></div>
+  <div class="skill-grid reveal">
+    <div class="skill"><b>C++</b><small>PROGRAMMING / OOP</small></div><div class="skill"><b>C</b><small>PROGRAMMING</small></div><div class="skill"><b>Python</b><small>AI / VISION</small></div><div class="skill"><b>Flutter</b><small>ANDROID</small></div><div class="skill"><b>JavaScript</b><small>WEB</small></div><div class="skill"><b>YOLO</b><small>DETECTION</small></div><div class="skill"><b>OpenCV</b><small>COMPUTER VISION</small></div><div class="skill"><b>Firebase</b><small>BACKEND</small></div><div class="skill"><b>ESP32</b><small>EMBEDDED</small></div><div class="skill"><b>GitHub</b><small>VERSION CONTROL</small></div>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap reveal">
+    <div class="tiny">06 / open channel</div>
+    <h2>LET'S<br>BUILD.</h2>
+    <p>Projects, coding, robotics, innovation, collaborations or something weird enough to be interesting.</p>
+    <div class="contact-links">
+      <a class="btn" href="https://wa.me/917229880224?text=Hi%20Gopal%2C%20I%20want%20to%20connect%20with%20you." target="_blank" rel="noopener">WHATSAPP ↗</a>
+      <a class="btn white" href="mailto:gopalcode.go@gmail.com">GMAIL ↗</a>
+      <a class="btn black" href="https://www.linkedin.com/in/gopal-sharma-67903a38a/" target="_blank" rel="noopener">LINKEDIN ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap footer-row"><span>© 2026 GOPAL SHARMA</span><span>CODE · ROBOTICS · IDEAS · JAIPUR</span></div></footer>
+
+<a class="wa" href="https://wa.me/917229880224?text=Hi%20Gopal%2C%20I%20want%20to%20connect%20with%20you." target="_blank" rel="noopener" aria-label="Connect with Gopal on WhatsApp">
+<svg viewBox="0 0 32 32"><path d="M27.5 4.5A15.5 15.5 0 0 0 3.1 23.2L1 31l8-2.1A15.5 15.5 0 1 0 27.5 4.5ZM16 28.3c-2.4 0-4.7-.6-6.7-1.8l-.5-.3-4.7 1.2 1.2-4.6-.3-.5A12.3 12.3 0 1 1 16 28.3Zm6.8-9.2c-.4-.2-2.3-1.1-2.7-1.2-.4-.1-.7-.2-1 .2-.3.4-1 1.2-1.2 1.5-.2.3-.5.3-.9.1-2.5-1.2-4.2-2.2-5.8-5-.4-.7.4-.7 1-2.2.1-.3 0-.6-.1-.8-.1-.2-1-2.4-1.3-3.3-.3-.8-.7-.7-1-.7h-.8c-.3 0-.8.1-1.2.6-.4.4-1.5 1.5-1.5 3.7s1.5 4.3 1.7 4.6c.2.3 3 4.6 7.2 6.4 2.7 1.2 3.8 1.3 5.2 1.1.8-.1 2.3-.9 2.6-1.8.3-.9.3-1.7.2-1.8-.1-.2-.4-.3-.8-.5Z"/></svg>
+</a>
+<button class="sound-toggle" id="soundToggle" aria-label="Toggle background music">♫</button>
+<div class="toast" id="toast">VIBE MODE: ON</div>
+
+<script>
+/* Scroll reveal */
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting){setTimeout(()=>e.target.classList.add('show'),i*45);observer.unobserve(e.target)}
+  })
+},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(x=>observer.observe(x));
+
+/* Photo fallback */
+function photoMissing(){document.getElementById('photoCard').classList.add('no-photo')}
+
+/*
+  ORIGINAL background music.
+  Browsers block autoplay audio, so the first click/tap on the page starts it.
+  The user can still toggle it with the bottom-left button.
+*/
+let audio=null, playing=false, timer=null;
+const progression=[110,146.83,164.81,196,220,164.81,146.83,130.81];
+
+function startAudio(){
+  if(!audio) audio=new (window.AudioContext||window.webkitAudioContext)();
+  if(audio.state==='suspended') audio.resume();
+}
+function note(freq,start,duration=.62,volume=.012,type='triangle'){
+  const osc=audio.createOscillator(), gain=audio.createGain();
+  osc.type=type;osc.frequency.setValueAtTime(freq,start);
+  gain.gain.setValueAtTime(.0001,start);
+  gain.gain.exponentialRampToValueAtTime(volume,start+.035);
+  gain.gain.exponentialRampToValueAtTime(.0001,start+duration);
+  osc.connect(gain);gain.connect(audio.destination);
+  osc.start(start);osc.stop(start+duration+.02);
+}
+function musicLoop(){
+  if(!playing)return;
+  const now=audio.currentTime;
+  progression.forEach((n,i)=>{
+    note(n,now+i*.43,.65,.012,'triangle');
+    if(i%2===0) note(n*2,now+i*.43,.22,.004,'sine');
+  });
+  timer=setTimeout(musicLoop,progression.length*430-30);
+}
+function setMusic(on){
+  startAudio();playing=on;
+  const pill=document.getElementById('musicPill'), label=document.getElementById('musicLabel'), toggle=document.getElementById('soundToggle');
+  pill.classList.toggle('playing',on);toggle.classList.toggle('playing',on);
+  label.textContent=on?'vibe on':'vibe off';toggle.textContent=on?'♫':'♪';
+  clearTimeout(timer);
+  if(on)musicLoop();
+  document.getElementById('toast').classList.add('show');
+  setTimeout(()=>document.getElementById('toast').classList.remove('show'),1200);
+}
+document.getElementById('musicPill').addEventListener('click',()=>setMusic(!playing));
+document.getElementById('soundToggle').addEventListener('click',()=>setMusic(!playing));
+
+/* First user interaction starts the original loop. This is the reliable
+   browser-safe alternative to autoplay. */
+let firstInteraction=true;
+function firstStart(){
+  if(firstInteraction){firstInteraction=false;setMusic(true)}
+}
+['pointerdown','keydown','touchstart'].forEach(ev=>window.addEventListener(ev,firstStart,{once:true,passive:true}));
+
+/* Tiny UI blips layered on top of the music */
+document.querySelectorAll('.btn,.project,.win,.skill,.spark-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    if(!playing||!audio)return;
+    note(520,audio.currentTime,.045,.008,'square');
+  });
+});
+</script>
+</body>
+</html>
